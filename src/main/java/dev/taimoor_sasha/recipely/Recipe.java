@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Recipe {
     @Id
-    private ObjectId id;
+    private String id;
     private String userId;
     private String firstName;
     private String lastName;

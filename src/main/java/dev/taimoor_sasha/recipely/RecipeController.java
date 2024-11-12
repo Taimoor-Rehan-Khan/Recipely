@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/recipes")
 public class RecipeController {
     @Autowired
@@ -20,9 +21,9 @@ public class RecipeController {
         return new ResponseEntity<List<Recipe>>(recipeService.allRecipes(), HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Optional<Recipe>> getSingleRecipe(@PathVariable String name) {
-        return new ResponseEntity<Optional<Recipe>>(recipeService.singleRecipe(name), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Recipe>> getSingleRecipe(@PathVariable String id) {
+        return new ResponseEntity<Optional<Recipe>>(recipeService.singleRecipe(id), HttpStatus.OK);
     }
 
     @PostMapping
@@ -30,9 +31,9 @@ public class RecipeController {
         return new ResponseEntity<Recipe>(recipeService.createRecipe(payload.get("userId"), payload.get("firstName"), payload.get("lastName"), payload.get("userPicturePath"), payload.get("picturePath"), payload.get("name"), payload.get("description"), payload.get("ingredients")), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Optional<Recipe>> deleteSingleRecipe(@PathVariable String name) {
-        return new ResponseEntity<Optional<Recipe>>(recipeService.deleteRecipe(name), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Optional<Recipe>> deleteSingleRecipe(@PathVariable String id) {
+        return new ResponseEntity<Optional<Recipe>>(recipeService.deleteRecipe(id), HttpStatus.OK);
     }
 
 }
