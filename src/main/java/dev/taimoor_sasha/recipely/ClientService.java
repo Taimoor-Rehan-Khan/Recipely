@@ -15,8 +15,8 @@ public class ClientService {
     }
 
 
-    public Optional<Client> singleClient(String userName) {
-        return clientRepository.findClientByUserName(userName);
+    public Client singleClient(String id) {
+        return clientRepository.findClientById(id);
     }
 
     public Client createClient(String firstName, String lastName, String userName, String password) {

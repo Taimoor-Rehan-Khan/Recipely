@@ -51,7 +51,7 @@ public class ClientController {
         Boolean found = false;
         for (Client client : clients) {
             if (client.getUserName().equals(payload.get("userName")) && client.getPassword().equals(payload.get("password"))) {
-                result = new ResponseEntity<String>(payload.get("userName"), HttpStatus.FOUND);
+                result = new ResponseEntity<String>(client.getId(), HttpStatus.OK);
                 found = true;
                 break;
             }

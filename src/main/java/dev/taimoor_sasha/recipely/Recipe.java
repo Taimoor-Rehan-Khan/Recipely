@@ -21,18 +21,14 @@ public class Recipe {
     private String userId;
     private String firstName;
     private String lastName;
-    private String userPicturePath;
-    private String picturePath;
     private String name;
     private String description;
     private String ingredients;
 
-    public Recipe(String userId, String firstName, String lastName, String userPicturePath, String picturePath, String name, String description, String ingredients) {
+    public Recipe(String userId, String firstName, String lastName, String name, String description, String ingredients) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userPicturePath = userPicturePath;
-        this.picturePath = picturePath;
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;

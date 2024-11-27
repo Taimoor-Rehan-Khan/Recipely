@@ -22,8 +22,8 @@ public class RecipeService {
         return recipeRepository.findRecipeById(id);
     }
 
-    public Recipe createRecipe(String userId, String firstName, String lastName, String userPicturePath, String picturePath, String name, String description, String ingredients) {
-        Recipe recipe =  recipeRepository.insert(new Recipe(userId, firstName, lastName, userPicturePath, picturePath, name, description, ingredients));
+    public Recipe createRecipe(String userId, String firstName, String lastName, String name, String description, String ingredients) {
+        Recipe recipe =  recipeRepository.insert(new Recipe(userId, firstName, lastName, name, description, ingredients));
         return recipe;
     }
 
