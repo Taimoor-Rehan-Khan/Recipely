@@ -45,21 +45,18 @@ public class ClientController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<String> loginClient(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<ClientSecure> loginClient(@RequestBody Map<String, String> payload) {
         List<Client> clients = clientService.allClients();
-        ResponseEntity<String> result = new ResponseEntity<String>("", HttpStatus.NOT_FOUND);
+        ResponseEntity<ClientSecure> result = new ResponseEntity<ClientSecure>(new ClientSecure("", "Not found"), HttpStatus.NOT_FOUND);
         Boolean found = false;
         for (Client client : clients) {
             if (client.getUserName().equals(payload.get("userName")) && client.getPassword().equals(payload.get("password"))) {
-                result = new ResponseEntity<String>(client.getId(), HttpStatus.OK);
+                result = new ResponseEntity<ClientSecure>(new ClientSecure(client.getId(), client.getFirstName()), HttpStatus.OK);
                 found = true;
                 break;
             }
         }
 
-        if(!found) {
-            result = new ResponseEntity<String>("User is not found :(", HttpStatus.NOT_FOUND);
-        }
 
         return result;
     }
