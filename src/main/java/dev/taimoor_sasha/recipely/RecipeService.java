@@ -18,17 +18,17 @@ public class RecipeService {
 //    public Optional<Recipe> singleRecipe(ObjectId id) {
 //        return recipeRepository.findById(id);
 //    }
-    public Optional<Recipe> singleRecipe(String name) {
-        return recipeRepository.findRecipeByName(name);
+    public Optional<Recipe> singleRecipe(String id) {
+        return recipeRepository.findRecipeById(id);
     }
 
-    public Recipe createRecipe(String userId, String firstName, String lastName, String userPicturePath, String picturePath, String name, String description, String ingredients) {
-        Recipe recipe =  recipeRepository.insert(new Recipe(userId, firstName, lastName, userPicturePath, picturePath, name, description, ingredients));
+    public Recipe createRecipe(String userId, String firstName, String lastName, String name, String description, String ingredients) {
+        Recipe recipe =  recipeRepository.insert(new Recipe(userId, firstName, lastName, name, description, ingredients));
         return recipe;
     }
 
-    public Optional<Recipe> deleteRecipe(String name) {
-        Optional<Recipe> recipe = recipeRepository.deleteRecipeByName(name);
+    public Optional<Recipe> deleteRecipe(String id) {
+        Optional<Recipe> recipe = recipeRepository.deleteRecipeById(id);
         return recipe;
     }
 

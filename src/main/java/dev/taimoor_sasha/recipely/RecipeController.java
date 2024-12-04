@@ -11,28 +11,33 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/recipes")
 public class RecipeController {
     @Autowired
     private RecipeService recipeService;
+    @Autowired
+    private ClientService clientService;
     @GetMapping
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         return new ResponseEntity<List<Recipe>>(recipeService.allRecipes(), HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    public ResponseEntity<Optional<Recipe>> getSingleRecipe(@PathVariable String name) {
-        return new ResponseEntity<Optional<Recipe>>(recipeService.singleRecipe(name), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Recipe>> getSingleRecipe(@PathVariable String id) {
+        return new ResponseEntity<Optional<Recipe>>(recipeService.singleRecipe(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Recipe> createRecipe(@RequestBody Map<String, String> payload) {
-        return new ResponseEntity<Recipe>(recipeService.createRecipe(payload.get("userId"), payload.get("firstName"), payload.get("lastName"), payload.get("userPicturePath"), payload.get("picturePath"), payload.get("name"), payload.get("description"), payload.get("ingredients")), HttpStatus.CREATED);
+        Client client = clientService.singleClient(payload.get("userId"));
+        System.out.print(client);
+        return new ResponseEntity<Recipe>(recipeService.createRecipe(client.getId(), client.getFirstName(), client.getLastName(), payload.get("name"), payload.get("description"), payload.get("ingredients")), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<Optional<Recipe>> deleteSingleRecipe(@PathVariable String name) {
-        return new ResponseEntity<Optional<Recipe>>(recipeService.deleteRecipe(name), HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Optional<Recipe>> deleteSingleRecipe(@PathVariable String id) {
+        return new ResponseEntity<Optional<Recipe>>(recipeService.deleteRecipe(id), HttpStatus.OK);
     }
 
 }

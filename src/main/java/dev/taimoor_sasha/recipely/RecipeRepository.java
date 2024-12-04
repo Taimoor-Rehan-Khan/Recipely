@@ -8,6 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface RecipeRepository extends MongoRepository<Recipe, ObjectId> {
-    Optional<Recipe> findRecipeByName(String name);
-    Optional<Recipe> deleteRecipeByName(String name);
+//    Optional<Recipe> findRecipeByName(String name);
+    Optional<Recipe> findRecipeById(String id);
+    Optional<Recipe> deleteRecipeById(String id);
+//    Optional<Recipe> deleteRecipeByName(String name);
 }
